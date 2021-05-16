@@ -1,14 +1,16 @@
+import { container } from 'tsyringe'
+import { FakeMailProvider, MailProvider } from '@providers/mail'
 import {
   UserRepositoryInMemory,
   UserRepository
 } from '@apps/users/repositories'
-import { container } from 'tsyringe'
 import { ForgotPasswordUseCase } from '@apps/users/usecases/forgot-password/forgot-password-usecase'
 import { CreateUserUseCase } from '@apps/users/usecases/create-user/create-user-usecase'
 import { AppError } from '@errors/app-error'
 
 let createUserUseCase: CreateUserUseCase
 let forgotPasswordUseCase: ForgotPasswordUseCase
+let fakeMailProvider: FakeMailProvider
 
 describe('FogotPasswordUseCase', () => {
   beforeEach(() => {
@@ -16,6 +18,12 @@ describe('FogotPasswordUseCase', () => {
       'UserRepository',
       UserRepositoryInMemory
     )
+
+    fakeMailProvider = new FakeMailProvider()
+    fakeMailProvider.sendMail = jest.fn()
+
+    container.registerInstance<MailProvider>('MailProvider', fakeMailProvider)
+
     createUserUseCase = container.resolve(CreateUserUseCase)
     forgotPasswordUseCase = container.resolve(ForgotPasswordUseCase)
   })
@@ -34,7 +42,7 @@ describe('FogotPasswordUseCase', () => {
 
     expect(userForgot.forgot).not.toBeNull()
     expect(userForgot.forgot_at).not.toBeNull()
-    // expect(fakeMailProvider.sendMail).toBeCalledTimes(1)
+    expect(fakeMailProvider.sendMail).toBeCalledTimes(2)
   })
 
   it('should not able to forgot password to email nonexists', async () => {

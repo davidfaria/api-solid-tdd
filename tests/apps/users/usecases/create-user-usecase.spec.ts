@@ -9,6 +9,7 @@ import { CreateUserUseCase } from '@apps/users/usecases/create-user/create-user-
 import { AppError } from '@errors/app-error'
 
 let createUserUseCase: CreateUserUseCase
+let fakeMailProvider: FakeMailProvider
 
 describe('CreateUserUseCase', () => {
   beforeEach(() => {
@@ -17,7 +18,10 @@ describe('CreateUserUseCase', () => {
       UserRepositoryInMemory
     )
 
-    container.registerSingleton<MailProvider>('MailProvider', FakeMailProvider)
+    fakeMailProvider = new FakeMailProvider()
+    fakeMailProvider.sendMail = jest.fn()
+
+    container.registerInstance<MailProvider>('MailProvider', fakeMailProvider)
 
     createUserUseCase = container.resolve(CreateUserUseCase)
   })
@@ -31,7 +35,7 @@ describe('CreateUserUseCase', () => {
     const userCreated = await createUserUseCase.execute(user)
 
     expect(userCreated).toHaveProperty('id')
-    // expect(fakeMailProvider.sendMail).toHaveBeenCalledTimes(1)
+    expect(fakeMailProvider.sendMail).toHaveBeenCalledTimes(1)
   })
 
   it('should not able to create duplicate user - Email address already used', async () => {

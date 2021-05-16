@@ -1,6 +1,6 @@
 import { celebrate, Segments, Joi } from 'celebrate'
 
-export const ChangePasswordValidator = celebrate({
+export const ResetPasswordValidator = celebrate({
   [Segments.BODY]: {
     token: Joi.string().guid(),
     password: Joi.string().required(),

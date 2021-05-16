@@ -4,13 +4,13 @@ import { AppError } from '@errors/app-error'
 import { UserRepository } from '@apps/users/repositories'
 import { User } from '@entities/user'
 
-type ChangePasswordUseCaseRequest = {
+type ResetPasswordUseCaseRequest = {
   token: string
   password: string
 }
 
 @injectable()
-export class ChangePasswordUseCase {
+export class ResetPasswordUseCase {
   constructor(
     @inject('UserRepository')
     private userRepository: UserRepository,
@@ -21,7 +21,7 @@ export class ChangePasswordUseCase {
   async execute({
     token,
     password
-  }: ChangePasswordUseCaseRequest): Promise<User> {
+  }: ResetPasswordUseCaseRequest): Promise<User> {
     const user = await this.userRepository.findByToken(token)
 
     if (!user) {
