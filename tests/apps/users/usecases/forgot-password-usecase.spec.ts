@@ -1,0 +1,54 @@
+import {
+  UserRepositoryInMemory,
+  UserRepository
+} from '@apps/users/repositories'
+import { container } from 'tsyringe'
+import { ForgotPasswordUseCase } from '@apps/users/usecases/forgot-password/forgot-password-usecase'
+import { CreateUserUseCase } from '@apps/users/usecases/create-user/create-user-usecase'
+import { AppError } from '@errors/app-error'
+
+let createUserUseCase: CreateUserUseCase
+let forgotPasswordUseCase: ForgotPasswordUseCase
+
+describe('FogotPasswordUseCase', () => {
+  beforeEach(() => {
+    container.registerSingleton<UserRepository>(
+      'UserRepository',
+      UserRepositoryInMemory
+    )
+    createUserUseCase = container.resolve(CreateUserUseCase)
+    forgotPasswordUseCase = container.resolve(ForgotPasswordUseCase)
+  })
+
+  it('should able to send mail to forgot password', async () => {
+    const user = {
+      name: `User1`,
+      email: `john@mail.com`,
+      password: '1234'
+    }
+    await createUserUseCase.execute(user)
+
+    const userForgot = await forgotPasswordUseCase.execute({
+      email: user.email
+    })
+
+    expect(userForgot.forgot).not.toBeNull()
+    expect(userForgot.forgot_at).not.toBeNull()
+    // expect(fakeMailProvider.sendMail).toBeCalledTimes(1)
+  })
+
+  it('should not able to forgot password to email nonexists', async () => {
+    const user = {
+      name: `User1`,
+      email: `john@mail.com`,
+      password: '1234'
+    }
+    await createUserUseCase.execute(user)
+
+    await expect(
+      forgotPasswordUseCase.execute({
+        email: 'email-not-exists@mail.com'
+      })
+    ).rejects.toEqual(new AppError('User does not exists'))
+  })
+})
