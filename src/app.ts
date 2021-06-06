@@ -1,8 +1,5 @@
 import 'reflect-metadata'
 import './bootstrap'
-import './database'
-import './container'
-// import connection from '@database/index'
 import express, { Request, Response, NextFunction } from 'express'
 import 'express-async-errors'
 import swaggerUI from 'swagger-ui-express'
@@ -10,20 +7,21 @@ import cors from 'cors'
 import helmet from 'helmet'
 import { errors } from 'celebrate'
 import swaggerFile from './docs/swagger.json'
-
 import { uploadConfig } from '@config/upload'
-import { logger } from '@config/logger'
-import { AppError } from '@errors/app-error'
+import { AppError } from '@shared/errors/app-error'
 
-// connection.create()
-import { routes } from './routes'
-// import rateLimiter from './middlewares/rate-limiter';
+import connection from '@shared/infra/typeorm'
+connection.create()
+import '@shared/container'
+
+import { routes } from '@shared/infra/http/routes'
+// import { rateLimiter } from '@shared/infra/http/middlewares'
 
 const app = express()
 
 // Middlewares
 app.use(cors())
-// app.use(rateLimiter);
+// app.use(rateLimiter)
 app.use(
   helmet({
     contentSecurityPolicy: false
@@ -44,11 +42,6 @@ app.use('/api', routes)
 app.use(errors())
 
 app.use((err: Error, req: Request, res: Response, _: NextFunction) => {
-  logger.error({
-    status: 'error',
-    message: err.message
-  })
-
   if (err instanceof AppError) {
     return res.status(err.status).json({
       status: 'error',

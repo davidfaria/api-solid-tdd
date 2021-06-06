@@ -16,14 +16,9 @@ module.exports = {
       {
         alias: {
           '@root': './src',
-          '@modules': './src/modules',
           '@config': './src/config',
-          '@database': './src/database',
-          '@entities': './src/entities',
-          '@errors': './src/errors',
-          '@middlewares': './src/middlewares',
-          '@providers': './src/providers',
-          '@storage': './src/storage',
+          '@modules': './src/modules',
+          '@shared': './src/shared',
           '@utils': './src/utils'
         }
       }

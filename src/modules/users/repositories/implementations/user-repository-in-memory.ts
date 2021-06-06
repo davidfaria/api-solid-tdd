@@ -1,5 +1,5 @@
 import { UserRepository, CreateUserDTO } from '@modules/users/repositories'
-import { User } from '@entities/user'
+import { User } from '@modules/users/entities/user'
 
 export class UserRepositoryInMemory implements UserRepository {
   private users: User[] = []

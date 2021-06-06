@@ -1,11 +1,11 @@
 import { resolve } from 'path'
 import { inject, injectable } from 'tsyringe'
 
-import { User, UserStatus } from '@entities/user'
+import { User, UserStatus } from '@modules/users/entities/user'
 
 import { UserRepository } from '@modules/users/repositories'
-import { HashProvider } from '@providers/hash'
-import { MailProvider } from '@providers/mail'
+import { HashProvider } from '@shared/container/providers/hash/hash-provider'
+import { MailProvider } from '@shared/container/providers/mail/mail-provider'
 import { EmailAlreadyUserd } from '@modules/users/errors'
 
 export type CreateUserRequest = {

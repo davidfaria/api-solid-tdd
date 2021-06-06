@@ -1,7 +1,7 @@
 import { injectable, inject } from 'tsyringe'
 import { UserRepository } from '@modules/users/repositories'
-import { HashProvider } from '@providers/hash'
-import { TokenProvider } from '@providers/token'
+import { HashProvider } from '@shared/container/providers/hash/hash-provider'
+import { TokenProvider } from '@shared/container/providers/token/token-provider'
 import { InvalidCredentials } from '@modules/users/errors'
 import { authConfig } from '@config/auth'
 

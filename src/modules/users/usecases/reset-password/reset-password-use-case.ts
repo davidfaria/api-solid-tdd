@@ -1,7 +1,7 @@
 import { inject, injectable } from 'tsyringe'
-import { HashProvider } from '@providers/hash'
+import { HashProvider } from '@shared/container/providers/hash/hash-provider'
 import { UserRepository } from '@modules/users/repositories'
-import { User } from '@entities/user'
+import { User } from '@modules/users/entities/user'
 import { TokenNotFound } from '@modules/users/errors'
 
 type ResetPasswordUseCaseRequest = {

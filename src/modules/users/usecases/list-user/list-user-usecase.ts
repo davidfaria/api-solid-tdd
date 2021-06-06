@@ -1,6 +1,6 @@
 import { injectable, inject } from 'tsyringe'
 import { UserRepository } from '@modules/users/repositories'
-import { User } from '@entities/user'
+import { User } from '@modules/users/entities/user'
 
 @injectable()
 export class ListUserUseCase {

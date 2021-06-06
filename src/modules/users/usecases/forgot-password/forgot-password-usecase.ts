@@ -3,8 +3,8 @@ import { inject, injectable } from 'tsyringe'
 import { v4 as uuid } from 'uuid'
 import { UserRepository } from '@modules/users/repositories'
 import { UserNotFound } from '@modules/users/errors'
-import { MailProvider } from '@providers/mail'
-import { User } from '@entities/user'
+import { MailProvider } from '@shared/container/providers/mail/mail-provider'
+import { User } from '@modules/users/entities/user'
 
 export type ForgotPasswordRequest = {
   email: string

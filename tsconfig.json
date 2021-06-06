@@ -18,14 +18,9 @@
     "baseUrl": "./src",
     "paths": {
       "@root/*": ["./*"],
-      "@modules/*": ["modules/*"],
       "@config/*": ["config/*"],
-      "@database/*": ["database/*"],
-      "@entities/*": ["entities/*"],
-      "@errors/*": ["errors/*"],
-      "@middlewares/*": ["middlewares/*"],
-      "@providers/*": ["providers/*"],
-      "@storage/*": ["storage/*"],
+      "@modules/*": ["modules/*"],
+      "@shared/*": ["shared/*"],
       "@utils/*": ["utils/*"],
       "@tests/*": ["../tests/*"]
     }
