@@ -1,7 +1,7 @@
 import { container } from 'tsyringe'
 import { ForgotPasswordUseCase } from '@modules/users/usecases/forgot-password/forgot-password-usecase'
 import { CreateUserUseCase } from '@modules/users/usecases/create-user/create-user-usecase'
-import { ResetPasswordUseCase } from '@modules/users/usecases/reset-password/reset-password-use-case'
+import { ResetPasswordUseCase } from '@modules/users/usecases/reset-password/reset-password-usecase'
 import { TokenNotFound } from '@modules/users/errors'
 
 let createUserUseCase: CreateUserUseCase

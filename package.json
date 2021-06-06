@@ -11,8 +11,11 @@
     "migration:run": "NODE_ENV=development ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run",
     "migration:revert": "NODE_ENV=development ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:revert",
     "test": "cross-env NODE_ENV=test jest  --maxWorkers=50%",
+    "test:watch": "cross-env NODE_ENV=test jest --maxWorkers=25% --watchAll",
     "test:unit": "cross-env NODE_ENV=test jest --config=jest-unit.config.ts  --maxWorkers=50%",
-    "test:watch": "cross-env NODE_ENV=test jest --watch --maxWorkers=25%",
+    "test:unit:watch": "cross-env NODE_ENV=test jest --config=jest-unit.config.ts  --maxWorkers=25% --watchAll",
+    "test:integration": "cross-env NODE_ENV=test jest --config=jest-integration.config.ts  --maxWorkers=50%",
+    "test:integration:watch": "cross-env NODE_ENV=test jest --config=jest-integration.config.ts  --maxWorkers=25% --watchAll",
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "lint": "eslint src --max-warnings=0",
     "format": "prettier --write src/**/*.ts{,x}"

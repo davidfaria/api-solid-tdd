@@ -1,6 +1,6 @@
 import { container } from 'tsyringe'
 import { Request, Response } from 'express'
-import { ResetPasswordUseCase } from './reset-password-use-case'
+import { ResetPasswordUseCase } from './reset-password-usecase'
 
 export class ResetPasswordController {
   async handle(request: Request, response: Response): Promise<Response> {
