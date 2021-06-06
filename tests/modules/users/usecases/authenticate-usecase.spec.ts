@@ -5,7 +5,6 @@ import {
 import { container } from 'tsyringe'
 import { AuthenticateUseCase } from '@modules/users/usecases/authenticate/authenticate-usecase'
 import { CreateUserUseCase } from '@modules/users/usecases/create-user/create-user-usecase'
-import { AppError } from '@errors/app-error'
 import { InvalidCredentials } from '@modules/users/errors/invalid-credentials-error'
 
 let createUserUseCase: CreateUserUseCase

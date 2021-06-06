@@ -1,5 +1,6 @@
 import { container } from 'tsyringe'
-import { FakeMailProvider, MailProvider } from '@providers/mail'
+import { MailProvider } from '@shared/container/providers/mail/mail-provider'
+import { FakeMailProvider } from '@shared/container/providers/mail/implementations/fake-mail-provider'
 import {
   UserRepositoryInMemory,
   UserRepository

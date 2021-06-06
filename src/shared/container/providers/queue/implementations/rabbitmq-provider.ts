@@ -6,7 +6,7 @@ import {
   PublishInQueueProps,
   PublishInExchangeProps,
   ConsumerProps
-} from '@providers/queue'
+} from '@shared/container/providers/queue/queue-provider'
 
 import { queueConfig } from '@config/queue'
 

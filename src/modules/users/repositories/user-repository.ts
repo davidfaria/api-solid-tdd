@@ -1,4 +1,4 @@
-import { User, UserStatus } from '@entities/user'
+import { User, UserStatus } from '@modules/users/entities/user'
 
 export type CreateUserDTO = {
   name: string

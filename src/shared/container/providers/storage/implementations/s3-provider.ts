@@ -3,7 +3,7 @@ import mime from 'mime'
 import path from 'path'
 import { injectable } from 'tsyringe'
 import aws from 'aws-sdk'
-import { StorageProvider } from './storage-provider'
+import { StorageProvider } from '@shared/container/providers/storage/storage-provider'
 
 import { uploadConfig } from '@config/upload'
 

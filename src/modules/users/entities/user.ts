@@ -6,6 +6,7 @@ import {
   UpdateDateColumn
 } from 'typeorm'
 
+import { v4 as uuid } from 'uuid'
 export enum UserStatus {
   registred = 'registred',
   confirmed = 'confirmed',
@@ -14,6 +15,12 @@ export enum UserStatus {
 
 @Entity('users')
 export class User {
+  constructor() {
+    if (!this.id) {
+      this.id = uuid()
+    }
+  }
+
   @PrimaryColumn()
   id: string
 

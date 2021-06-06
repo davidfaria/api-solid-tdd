@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import { injectable } from 'tsyringe'
-import { StorageProvider } from './storage-provider'
+import { StorageProvider } from '@shared/container/providers/storage/storage-provider'
 import { uploadConfig } from '@config/upload'
 
 @injectable()

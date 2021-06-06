@@ -1,3 +1,4 @@
 import { container } from 'tsyringe'
-import { MailProvider, FakeMailProvider } from '@providers/mail'
+import { MailProvider } from '@shared/container/providers/mail/mail-provider'
+import { FakeMailProvider } from '@shared/container/providers/mail/implementations/fake-mail-provider'
 container.registerSingleton<MailProvider>('MailProvider', FakeMailProvider)

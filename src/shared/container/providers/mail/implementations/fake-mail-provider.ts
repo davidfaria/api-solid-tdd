@@ -1,4 +1,7 @@
-import { MailProvider, SendMail } from '@providers/mail'
+import {
+  MailProvider,
+  SendMail
+} from '@shared/container/providers/mail/mail-provider'
 
 export class FakeMailProvider implements MailProvider {
   messages: SendMail[] = []
