@@ -8,11 +8,9 @@ import {
 } from '@providers/storage'
 
 const getProvider = () => {
-  if (uploadConfig.driver === 'disk') {
-    return DiskStorageProvider
-  }
-
-  return S3StorageProvider
+  return uploadConfig.driver === 'disk'
+    ? DiskStorageProvider
+    : S3StorageProvider
 }
 
 container.registerSingleton<StorageProvider>('StorageProvider', getProvider())

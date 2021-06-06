@@ -6,7 +6,7 @@ import {
 } from '@apps/users/repositories'
 import { ForgotPasswordUseCase } from '@apps/users/usecases/forgot-password/forgot-password-usecase'
 import { CreateUserUseCase } from '@apps/users/usecases/create-user/create-user-usecase'
-import { AppError } from '@errors/app-error'
+import { UserNotFound } from '@apps/users/errors'
 
 let createUserUseCase: CreateUserUseCase
 let forgotPasswordUseCase: ForgotPasswordUseCase
@@ -57,6 +57,6 @@ describe('FogotPasswordUseCase', () => {
       forgotPasswordUseCase.execute({
         email: 'email-not-exists@mail.com'
       })
-    ).rejects.toEqual(new AppError('User does not exists'))
+    ).rejects.toBeInstanceOf(UserNotFound)
   })
 })

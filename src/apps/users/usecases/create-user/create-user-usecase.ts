@@ -1,11 +1,12 @@
 import { resolve } from 'path'
 import { inject, injectable } from 'tsyringe'
-import { AppError } from '@errors/app-error'
+
 import { User, UserStatus } from '@entities/user'
 
 import { UserRepository } from '@apps/users/repositories'
 import { HashProvider } from '@providers/hash'
 import { MailProvider } from '@providers/mail'
+import { EmailAlreadyUserd } from '@apps/users/errors'
 
 export type CreateUserRequest = {
   name: string
@@ -28,7 +29,7 @@ export class CreateUserUseCase {
     const userExists = await this.repository.findByEmail(email)
 
     if (userExists) {
-      throw new AppError('Email address already used')
+      throw new EmailAlreadyUserd()
     }
 
     const hashedPassword = await this.hashProvider.generateHash(password)

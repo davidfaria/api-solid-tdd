@@ -1,8 +1,8 @@
-import { AppError } from '@errors/app-error'
 import { container } from 'tsyringe'
 import { ForgotPasswordUseCase } from '@apps/users/usecases/forgot-password/forgot-password-usecase'
 import { CreateUserUseCase } from '@apps/users/usecases/create-user/create-user-usecase'
 import { ResetPasswordUseCase } from '@apps/users/usecases/reset-password/reset-password-use-case'
+import { TokenNotFound } from '@apps/users/errors'
 
 let createUserUseCase: CreateUserUseCase
 let forgotPasswordUseCase: ForgotPasswordUseCase
@@ -42,6 +42,6 @@ describe('ResetPasswordUseCase', () => {
         token: 'token-nonexist',
         password: '654321'
       })
-    ).rejects.toEqual(new AppError('User token does not exists'))
+    ).rejects.toBeInstanceOf(TokenNotFound)
   })
 })

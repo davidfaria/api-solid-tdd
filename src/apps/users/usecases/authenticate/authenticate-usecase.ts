@@ -2,7 +2,7 @@ import { injectable, inject } from 'tsyringe'
 import { UserRepository } from '@apps/users/repositories'
 import { HashProvider } from '@providers/hash'
 import { TokenProvider } from '@providers/token'
-import { AppError } from '@errors/app-error'
+import { InvalidCredentials } from '@apps/users/errors'
 import { authConfig } from '@config/auth'
 
 export type AuthenticateRequest = {
@@ -38,7 +38,7 @@ export class AuthenticateUseCase {
     const user = await this.repository.findByEmail(email)
 
     if (!user) {
-      throw new AppError('Email or password incorrect')
+      throw new InvalidCredentials()
     }
 
     const passwordMatch = await this.hashProvider.compareHash(
@@ -47,7 +47,7 @@ export class AuthenticateUseCase {
     )
 
     if (!passwordMatch) {
-      throw new AppError('Email or password incorrect')
+      throw new InvalidCredentials()
     }
 
     const token = this.tokenProvider.generateToken(authConfig.jwt.secret)

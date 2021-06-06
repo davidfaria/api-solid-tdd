@@ -1,7 +1,7 @@
-import { AppError } from '@errors/app-error'
 import { container } from 'tsyringe'
 import { CreateUserUseCase } from '@apps/users/usecases/create-user/create-user-usecase'
 import { RegisterConfirmationUseCase } from '@apps/users/usecases/register-confirmation/register-confirmation-usecase'
+import { UserNotFound } from '@apps/users/errors'
 
 let createUserUseCase: CreateUserUseCase
 let registerConfirmationUseCase: RegisterConfirmationUseCase
@@ -33,6 +33,6 @@ describe('RegisterConfirmationUseCase', () => {
       registerConfirmationUseCase.execute({
         email: 'nonexist@mail.com'
       })
-    ).rejects.toEqual(new AppError('User does not exists'))
+    ).rejects.toBeInstanceOf(UserNotFound)
   })
 })

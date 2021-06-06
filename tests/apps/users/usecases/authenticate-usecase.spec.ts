@@ -6,6 +6,7 @@ import { container } from 'tsyringe'
 import { AuthenticateUseCase } from '@apps/users/usecases/authenticate/authenticate-usecase'
 import { CreateUserUseCase } from '@apps/users/usecases/create-user/create-user-usecase'
 import { AppError } from '@errors/app-error'
+import { InvalidCredentials } from '@apps/users/errors/invalid-credentials-error'
 
 let createUserUseCase: CreateUserUseCase
 let authenticateUseCase: AuthenticateUseCase
@@ -51,7 +52,7 @@ describe('AuthenticateUseCase', () => {
         email: 'nonexists@mail.com',
         password: user.password
       })
-    ).rejects.toEqual(new AppError('Email or password incorrect'))
+    ).rejects.toBeInstanceOf(InvalidCredentials)
   })
 
   it('should not able to authenticate a user with password invalid', async () => {
@@ -67,6 +68,6 @@ describe('AuthenticateUseCase', () => {
         email: user.email,
         password: 'incorrect-password'
       })
-    ).rejects.toEqual(new AppError('Email or password incorrect'))
+    ).rejects.toBeInstanceOf(InvalidCredentials)
   })
 })

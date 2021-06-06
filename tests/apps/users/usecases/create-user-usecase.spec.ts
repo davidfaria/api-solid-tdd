@@ -5,8 +5,7 @@ import {
   UserRepositoryInMemory
 } from '@apps/users/repositories'
 import { CreateUserUseCase } from '@apps/users/usecases/create-user/create-user-usecase'
-
-import { AppError } from '@errors/app-error'
+import { EmailAlreadyUserd } from '@apps/users/errors'
 
 let createUserUseCase: CreateUserUseCase
 let fakeMailProvider: FakeMailProvider
@@ -46,8 +45,8 @@ describe('CreateUserUseCase', () => {
     }
     await createUserUseCase.execute(user)
 
-    await expect(createUserUseCase.execute(user)).rejects.toEqual(
-      new AppError('Email address already used')
+    await expect(createUserUseCase.execute(user)).rejects.toBeInstanceOf(
+      EmailAlreadyUserd
     )
   })
 })

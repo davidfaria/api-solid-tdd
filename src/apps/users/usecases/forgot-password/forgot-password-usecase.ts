@@ -2,8 +2,8 @@ import { resolve } from 'path'
 import { inject, injectable } from 'tsyringe'
 import { v4 as uuid } from 'uuid'
 import { UserRepository } from '@apps/users/repositories'
+import { UserNotFound } from '@apps/users/errors'
 import { MailProvider } from '@providers/mail'
-import { AppError } from '@errors/app-error'
 import { User } from '@entities/user'
 
 export type ForgotPasswordRequest = {
@@ -22,7 +22,7 @@ export class ForgotPasswordUseCase {
     const user = await this.repository.findByEmail(email)
 
     if (!user) {
-      throw new AppError('User does not exists')
+      throw new UserNotFound()
     }
 
     const token = uuid()

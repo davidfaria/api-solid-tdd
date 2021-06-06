@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe'
 import { HashProvider } from '@providers/hash'
-import { AppError } from '@errors/app-error'
 import { UserRepository } from '@apps/users/repositories'
 import { User } from '@entities/user'
+import { TokenNotFound } from '@apps/users/errors'
 
 type ResetPasswordUseCaseRequest = {
   token: string
@@ -25,7 +25,8 @@ export class ResetPasswordUseCase {
     const user = await this.userRepository.findByToken(token)
 
     if (!user) {
-      throw new AppError('User token does not exists')
+      // throw new AppError('User token does not exists')
+      throw new TokenNotFound()
     }
 
     // const tokenCreatedAt = userToken.created_at

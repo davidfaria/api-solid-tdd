@@ -1,7 +1,7 @@
 import { injectable, inject } from 'tsyringe'
-import { AppError } from '@errors/app-error'
 import { User, UserStatus } from '@entities/user'
 import { UserRepository } from '@apps/users/repositories'
+import { UserNotFound } from '@apps/users/errors'
 
 export type RegisterConfirmationRequest = {
   email: string
@@ -18,7 +18,7 @@ export class RegisterConfirmationUseCase {
     const user = await this.repository.findByEmail(email)
 
     if (!user) {
-      throw new AppError('User does not exists')
+      throw new UserNotFound()
     }
 
     user.confirmed_at = new Date()
