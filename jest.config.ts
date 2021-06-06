@@ -10,15 +10,15 @@ export default {
     prefix: '<rootDir>/src/'
   }),
   collectCoverageFrom: [
-    '<rootDir>/src/apps/**/*.ts',
+    '<rootDir>/src/modules/**/*.ts',
     '<rootDir>/src/utils/**/*.ts',
-    '!<rootDir>/src/apps/**/index.ts',
-    '!<rootDir>/src/apps/**/*-interface.ts',
-    '!<rootDir>/src/apps/**/*-validator.ts',
-    '!<rootDir>/src/apps/**/*-controller.ts',
-    '!<rootDir>/src/apps/**/*-factory.ts',
-    '!<rootDir>/src/apps/**/*-routes.ts',
-    '!<rootDir>/src/apps/**/repositories/**/*.ts'
+    '!<rootDir>/src/modules/**/index.ts',
+    '!<rootDir>/src/modules/**/*-interface.ts',
+    '!<rootDir>/src/modules/**/*-validator.ts',
+    '!<rootDir>/src/modules/**/*-controller.ts',
+    '!<rootDir>/src/modules/**/*-factory.ts',
+    '!<rootDir>/src/modules/**/*-routes.ts',
+    '!<rootDir>/src/modules/**/repositories/**/*.ts'
   ],
   coverageDirectory: 'coverage',
   coverageProvider: 'v8',

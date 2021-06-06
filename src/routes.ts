@@ -1,11 +1,11 @@
 import { Router } from 'express'
 import { ensureAuthenticated } from '@middlewares/ensure-authenticated'
 
-import { authenticateRoutes } from '@apps/users/routes/authenticate-routes'
-import { forgotPasswordRoutes } from '@apps/users/routes/forgot-password-routes'
-import { resetPasswordRoutes } from '@apps/users/routes/reset-password-routes'
-import { registerConfirmationRoutes } from '@apps/users/routes/register-confirmation-routes'
-import { userRoutes } from '@apps/users/routes/user-routes'
+import { authenticateRoutes } from '@modules/users/routes/authenticate-routes'
+import { forgotPasswordRoutes } from '@modules/users/routes/forgot-password-routes'
+import { resetPasswordRoutes } from '@modules/users/routes/reset-password-routes'
+import { registerConfirmationRoutes } from '@modules/users/routes/register-confirmation-routes'
+import { userRoutes } from '@modules/users/routes/user-routes'
 
 const routes = Router()
 
