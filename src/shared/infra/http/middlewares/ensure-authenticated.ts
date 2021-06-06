@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { verify } from 'jsonwebtoken'
 import { authConfig } from '@config/auth'
-import { AppError } from '@shared/errors'
+import { InvalidTokenError, TokenMissingError } from '@shared/errors'
 
 interface TokenPayload {
   iat: number
@@ -17,7 +17,7 @@ export async function ensureAuthenticated(
   const authHeader = req.headers.authorization
 
   if (!authHeader) {
-    throw new AppError('Token is missing', 401)
+    throw new TokenMissingError()
   }
 
   const [, token] = authHeader.split(' ')
@@ -34,6 +34,6 @@ export async function ensureAuthenticated(
 
     return next()
   } catch (error) {
-    throw new AppError('Invalid token', 401)
+    throw new InvalidTokenError()
   }
 }
